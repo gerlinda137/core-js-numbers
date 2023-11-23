@@ -179,8 +179,13 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const number = 10 ** pow;
+  const razniza = num % number;
+  if (razniza < number / 2) {
+    return num - razniza;
+  }
+  return num + (number - razniza);
 }
 
 /**
@@ -261,8 +266,28 @@ function getCube(num) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  let prev = 1;
+  let number = 1;
+  let result = 0;
+
+  if (index === 0) {
+    return 0;
+  }
+  if (index === 1) {
+    return 1;
+  }
+
+  if (index === 2) {
+    return 1;
+  }
+
+  for (let i = 2; i < index; i += 1) {
+    result = prev + number;
+    prev = number;
+    number = result;
+  }
+  return result;
 }
 
 /**
@@ -349,8 +374,9 @@ function getSine(num) {
  * 255, 16 => 'ff'
  * 2, 2    => '10'
  */
-function numberToStringInBase(/* number, base */) {
-  throw new Error('Not implemented');
+function numberToStringInBase(number, base) {
+  const string = number.toString(base);
+  return string;
 }
 
 /**
@@ -631,8 +657,24 @@ function getHypotenuse(a, b) {
  * 10 => 5
  * 15 => 8
  */
-function getCountOfOddNumbers(/* number */) {
-  throw new Error('Not implemented');
+function getCountOfOddNumbers(number) {
+  const odds = [];
+
+  if (number > 0) {
+    for (let i = 1; i <= number; i += 1) {
+      if (i % 2 !== 0) {
+        odds.push(i);
+      }
+    }
+  } else if (number <= 0) {
+    for (let i = -1; i >= number; i -= 1) {
+      if (i % 2 !== 0) {
+        odds.push(i);
+      }
+    }
+  }
+
+  return odds.length;
 }
 
 module.exports = {
